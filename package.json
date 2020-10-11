@@ -1,8 +1,8 @@
 {
   "name": "q-backup-sys",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Backup system",
+  "productName": "Zinstall backup",
   "author": "dud3 <dk18184@gmail.com>",
   "private": true,
   "scripts": {

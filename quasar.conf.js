@@ -115,9 +115,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
-        description: 'A Quasar Framework app',
+        name: 'Zinstall backup',
+        short_name: 'Backup system',
+        description: 'Backup system',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
