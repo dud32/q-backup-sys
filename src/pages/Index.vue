@@ -31,7 +31,7 @@
                         <p class="no-padding no-margin">To backup: 64 GB</p>
                         <p class="no-padding no-margin">No backups made yet</p>
                       <template v-slot:action>
-                        <q-btn flat color="primary" label="Settings" />
+                        <q-btn flat color="primary" label="Settings" @click="dend" />
                       </template>
                     </q-banner>
                 </div>
@@ -55,7 +55,7 @@
                         <p class="no-padding no-margin">- Weekly backups...
                         </p>
                       <template v-slot:action>
-                        <q-btn flat color="primary" label="Settings" />
+                        <q-btn flat color="primary" label="Settings" @click="dend" />
                       </template>
                     </q-banner>
                 </div>
@@ -74,7 +74,7 @@
                       <p><b>Restore backups</b></p>
                         <p class="no-padding no-margin">Restore to any saved point in time</p>
                       <template v-slot:action>
-                        <q-btn flat color="primary" label="Restore" />
+                        <q-btn flat color="primary" label="Restore" @click="dend" />
                       </template>
                     </q-banner>
                 </div>
@@ -90,6 +90,17 @@ export default {
   components: {
     SerialDialog
   },
-  name: 'PageIndex'
+  name: 'PageIndex',
+  methods: {
+    dend () {
+      this.$q.notify({
+        color: 'blue',
+        position: 'top',
+        textColor: 'white',
+        icon: 'info',
+        message: 'Work in progress...'
+      })
+    }
+  }
 }
 </script>
