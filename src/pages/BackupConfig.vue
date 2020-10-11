@@ -30,7 +30,7 @@
           <q-card-actions>
             <q-btn>Exclude</q-btn>
             <q-btn>Change</q-btn>
-            <q-btn color="primary" icon="settings">Advanced</q-btn>
+            <q-btn color="primary" class="float-right" icon="settings"></q-btn>
           </q-card-actions>
         </q-card>
       </div>
