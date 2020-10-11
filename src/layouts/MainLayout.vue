@@ -30,7 +30,7 @@
 
         <q-separator vertical inset />
 
-        <q-btn dense round flat icon="search" class="text-white q-ma-sm"></q-btn>
+        <q-btn dense round flat icon="search" class="text-white q-ma-sm" @click="dend"></q-btn>
 
         <q-btn
           flat
@@ -40,6 +40,7 @@
           class="text-white text-right"
           style="font-size: 16px;"
           aria-label="Menu"
+          @click="dend"
         >
         <q-popup-proxy ref="LoginProxy" :offset="[0, 0]">
           <q-banner @click="$refs.LoginProxy.hide()" class="text-black no-padding">
@@ -61,7 +62,7 @@
                 </q-item-section>
               </q-item>
 
-              <q-item @click="dend" clickable v-ripple>
+              <q-item @click="dend" sclickable v-ripple>
                 <q-item-section avatar>
                 <q-icon name="exit_to_app"></q-icon>
                 </q-item-section>
@@ -125,6 +126,17 @@ export default {
       toggle: true,
       leftDrawerOpen: false,
       essentialLinks: linksData
+    }
+  },
+  methods: {
+    dend () {
+      this.$q.notify({
+        color: 'blue',
+        position: 'top',
+        textColor: 'white',
+        icon: 'info',
+        message: 'Work in progress...'
+      })
     }
   }
 }
