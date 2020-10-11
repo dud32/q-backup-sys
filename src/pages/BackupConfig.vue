@@ -1,37 +1,39 @@
 <template>
-    <div class="row col-12 justify-center">
+    <div class="row col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 justify-center">
+      <div class="col-10">
         <h4>{{ $route.name }}</h4>
+      </div>
 
-        <div class="col-10">
-          <q-card v-for="(item, i) in data" :key="i" flat bordered
-            class="my-card q-mb-sm bg-grey-1">
-            <q-card-section>
-              <div class="row items-center no-wrap">
-                <div class="col">
-                  <div class="text-h6">{{ item.volume }}</div>
-                  <div class="text-subtitle2">Quota {{ item.quota }}</div>
-                </div>
-
-                <div class="col-auto">
-                  <q-toggle v-model="item.select">
-                  </q-toggle>
-                </div>
+      <div class="col-10">
+        <q-card v-for="(item, i) in data" :key="i" flat bordered
+          class="my-card q-mb-sm bg-grey-1">
+          <q-card-section>
+            <div class="row items-center no-wrap">
+              <div class="col">
+                <div class="text-h6">{{ item.volume }}</div>
+                <div class="text-subtitle2">Quota {{ item.quota }}</div>
               </div>
-            </q-card-section>
 
-            <q-card-section>
-              Saving backups to drive <b>{{ item.to }}</b>
-            </q-card-section>
+              <div class="col-auto">
+                <q-toggle v-model="item.select">
+                </q-toggle>
+              </div>
+            </div>
+          </q-card-section>
 
-            <q-separator />
+          <q-card-section>
+            Saving backups to drive <b>{{ item.to }}</b>
+          </q-card-section>
 
-            <q-card-actions>
-              <q-btn>Exclude</q-btn>
-              <q-btn>Change</q-btn>
-              <q-btn color="primary" icon="settings">Advanced</q-btn>
-            </q-card-actions>
-          </q-card>
-        </div>
+          <q-separator />
+
+          <q-card-actions>
+            <q-btn>Exclude</q-btn>
+            <q-btn>Change</q-btn>
+            <q-btn color="primary" icon="settings">Advanced</q-btn>
+          </q-card-actions>
+        </q-card>
+      </div>
     </div>
 </template>
 
