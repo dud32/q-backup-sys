@@ -15,17 +15,18 @@
           style="height: auto; width: 64px; border-radius: 50%"
           class="cursor-pointer"
           src="001.png"
+          @click="$router.push('/')"
          />
         <q-toolbar-title class="text-left text-accent" style="font-size: 16px;">
         </q-toolbar-title>
 
         <q-toggle size="xl"
-        class="q-pr-md"
-        v-model="toggle"
-        :label="'Backup ' + (toggle ? 'on' : 'off')"
-        color="green"
-        checked-icon="check"
-        unchecked-icon="clear" />
+          class="q-pr-md"
+          v-model="toggle"
+          :label="'Backup ' + (toggle ? 'on' : 'off')"
+          color="green"
+          checked-icon="check"
+          unchecked-icon="clear" />
 
         <q-separator vertical inset />
 
