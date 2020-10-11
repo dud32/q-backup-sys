@@ -1,47 +1,46 @@
 <template>
-  <q-dialog v-model="show" persistent>
+  <q-dialog v-model="show" persistent :maximized="true">
     <q-card>
       <q-card-section class="row items-center">
-        <q-avatar icon="signal_wifi_off" color="primary" text-color="white" />
+        <div class="row col-12 justify-center">
          <q-form
             @submit="onSubmit"
-            @reset="onReset"
-            class="q-gutter-md"
+            class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 q-pa-md bg-grey-1"
           >
-            <q-input
+
+          <q-avatar icon="lock" color="primary" text-color="white" class="q-mb-md">
+          </q-avatar>
+
+          <p>Please enter the serial key...</p>
+
+          <q-input
               filled
-              v-model="name"
-              label="Your name *"
-              hint="Name and surname"
+              v-model="serial"
+              label="Serial number"
+              mask="XXXX - XXXX - XXXX - XXXX"
+              hint="Mask: XXXX - XXXX- XXXX - XXXX"
               lazy-rules
-              :rules="[ val => val && val.length > 0 || 'Please type something']"
+              :rules="[ val => val && val.length > 0 || 'Please enter serial key.']"
+              class="q-pb-lg"
             />
 
             <q-input
               filled
-              type="number"
-              v-model="age"
-              label="Your age *"
+              v-model="email"
+              label="Email *"
               lazy-rules
-              :rules="[
-                val => val !== null && val !== '' || 'Please type your age',
-                val => val > 0 && val < 100 || 'Please type a real age'
-              ]"
+              :rules="[ val => val && val.length > 0 || 'Please type email.']"
             />
 
             <q-toggle v-model="accept" label="I accept the license and terms" />
 
-            <div>
-              <q-btn label="Submit" type="submit" color="primary"/>
-              <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+            <div class="q-pt-md">
+              <q-btn label="Submit" type="submit" color="primary" />
+              <q-btn flat label="Cancel" color="primary" v-close-popup />
             </div>
           </q-form>
+        </div>
       </q-card-section>
-
-      <q-card-actions align="right">
-        <q-btn flat label="Cancel" color="primary" v-close-popup />
-        <q-btn flat label="Turn on Wifi" color="primary" v-close-popup />
-      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
@@ -61,15 +60,17 @@ export default {
   },
   data () {
     return {
+      accept: false,
       show: true,
       name: '',
-      age: null
+      age: null,
+      email: null,
+      serial: null
     }
   },
   created () {
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     onSubmit () {
       if (this.accept !== true) {
@@ -79,14 +80,15 @@ export default {
           icon: 'warning',
           message: 'You need to accept the license and terms first'
         })
-      }
-      else {
+      } else {
         this.$q.notify({
-          color: 'green-4',
+          color: 'green',
           textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
+          icon: 'check',
+          message: 'Activated'
         })
+
+        this.show = false
       }
     },
 

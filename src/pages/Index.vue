@@ -61,11 +61,16 @@
                 </div>
             </div>
         </div>
+        <serial-dialog />
     </div>
 </template>
 
 <script>
+import SerialDialog from './../components/dialog/Serial'
 export default {
+  components: {
+    SerialDialog
+  },
   name: 'PageIndex'
 }
 </script>
