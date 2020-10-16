@@ -31,7 +31,7 @@
             <div class="row col-12">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 q-pt-sm">
                 <q-btn @click="$router.push(`/config/fileSystem/${encodeURIComponent(item.volume)}/exclude`)" class="q-mr-sm">Exclude</q-btn>
-                <q-btn @click="save" class="q-mr-sm">Change</q-btn>
+                <q-btn @click="medium = true" class="q-mr-sm">Change</q-btn>
                 <q-btn @click="save" color="primary" icon="settings"></q-btn>
               </div>
 
@@ -46,14 +46,62 @@
           </q-card-actions>
         </q-card>
       </div>
+
+      <q-dialog
+        v-model="medium"
+      >
+        <div style="width: 1000px" class="col-12 row">
+        <div class="row col-12 bg-grey-1 q-pa-sm">
+          <div class="col-10">
+            <b>Select source</b>
+          </div>
+          <div class="col-2 text-right">
+            <q-btn icon="close" size="md" flat round dense v-close-popup />
+          </div>
+        </div>
+         <q-card flat square
+          @click="medium = false"
+          class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 q-pa-sm cursor-pointer my-card" v-for="(item, i) in cards" :key="i">
+            <q-card-section horizontal>
+              <img
+                class="col-5"
+                :src="item.img"
+                style="width: 124px;"
+              />
+
+              <q-card-section>
+                <q-linear-progress style="width: 64px;" size="10px" :value="item.progress" class="bg-grey-1" />
+                {{ item.l }}
+              </q-card-section>
+            </q-card-section>
+          </q-card>
+        </div>
+        </q-dialog>
     </div>
 </template>
+
+<style>
+  .my-card:hover {
+    background-color: #ccc;
+  }
+</style>
 
 <script>
 export default {
   name: 'PageFsExclude',
   data: () => {
     return {
+      medium: false,
+
+      cards: [
+        { l: 'Local machine', img: 'https://upload.wikimedia.org/wikipedia/commons/5/54/Crystal_Project_harddrive.png', progress: 0.1 },
+        { l: 'Dropbox', img: 'https://cfl.dropboxstatic.com/static/images/logo_catalog/twitter-card-glyph_m1%402x.png', progress: 0.5 },
+        { l: 'Google drive', img: 'https://ssl.gstatic.com/images/branding/product/2x/hh_drive_96dp.png', progress: 0.2 },
+        { l: 'Amazon s3', img: 'https://cdn.cyberduck.io/img/s3.png', progress: 0.6 },
+        { l: 'Network', img: 'https://cdn0.iconfinder.com/data/icons/data-recovery-flat/58/015_-_Hard_Drive_Network-512.png', progress: 0.1 },
+        { l: 'Other', img: 'https://ssl.gstatic.com/images/branding/product/2x/hh_drive_96dp.png', progress: 0.8 }
+      ],
+
       lorem: 'Lorem ipsum dolor sit amet, con...',
       period: {
         options: ['1 hour', '2 hours', '3 hours', '4 hours', '6 hours', '8 hours', '12 hours', '24 hours']
