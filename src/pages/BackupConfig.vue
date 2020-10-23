@@ -47,6 +47,8 @@
         </q-card>
       </div>
 
+      <!-- Source -->
+
       <q-dialog
         v-model="medium"
       >
@@ -79,6 +81,8 @@
         </div>
         </q-dialog>
 
+      <!-- Settings -->
+
       <q-dialog
         v-model="modal.settings.show"
       >
@@ -94,13 +98,13 @@
 
           <div class="col-12 q-pa-sm bg-white">
             <q-card square flat
-              class="col-12 q-pa-sm">
+              class="col-12 q-pa-sm bs-border-grey">
               <p>Select backup target folder</p>
                <q-form
                 class="q-gutter-md row col-12"
               >
               <div class="row">
-                <div class="col-8 q-pr-sm">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-12 q-pr-sm">
                   <q-input
                     filled
                     v-model="modal.settings.input.name"
@@ -110,7 +114,7 @@
                     :rules="[ val => val && val.length > 0 || 'Please type something']"
                   />
                 </div>
-                <div class="col-4 q-pt-md">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 q-pt-md">
                   <input type="file" webkitdirectory directory multiple/>
                 </div>
               </div>
@@ -147,7 +151,7 @@
               </q-form>
             </q-card>
 
-            <q-card class="q-pa-sm q-mt-sm" square flat>
+            <q-card class="q-pa-sm q-mt-sm bs-border-grey" square flat>
               <q-item-section>
                 <q-item-label>
                   Defuned user quota <q-checkbox v-model="modal.settings.input.quota" />
@@ -170,7 +174,7 @@
               </div>
             </q-card>
 
-            <q-card class="q-pa-sm q-mt-sm" square flat>
+            <q-card class="q-pa-sm q-mt-sm bs-border-grey" square flat>
               <q-item-section>
                 <q-item-label>
                   Write throttling <q-checkbox v-model="modal.settings.input.throttle" />

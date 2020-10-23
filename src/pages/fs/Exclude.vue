@@ -5,53 +5,7 @@
       </div>
 
       <div class="col-12 q-pa-md">
-        <div class="row">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-pa-md">
-             <q-input
-                ref="filter"
-                filled
-                v-model="filter"
-                label="Search - files or folders"
-              >
-                <template v-slot:append>
-                  <q-icon v-if="filter !== ''" name="clear" class="cursor-pointer" @click="resetFilter" />
-                </template>
-              </q-input>
-            <q-tree class="col-12 col-sm-6"
-              :nodes="simple"
-              node-key="label"
-              tick-strategy="leaf"
-              :selected.sync="selected"
-              :ticked.sync="ticked"
-              :expanded.sync="expanded"
-              :filter="filter"
-              :filter-method="myFilterMethod"
-            />
-          </div>
-
-          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 q-pa-md">
-            <!-- div class="text-h6">Selected</div>
-              <div>{{ selected }}</div -->
-
-              <q-separator spaced />
-
-              <div class="text-h6">Excluded files</div>
-              <div>
-                <div v-for="tick in ticked" :key="`ticked-${tick}`">
-                  - {{ tick }}
-                </div>
-              </div>
-
-              <q-separator spaced />
-
-              <!-- div class="text-h6">Expanded</div>
-              <div>
-                <div v-for="expand in expanded" :key="`expanded-${expand}`">
-                  {{ expand }}
-                </div>
-              </div -->
-          </div>
-        </div>
+        <file-tree :excludedFiles="true" />
       </div>
 
       <div class="row col-12 q-pa-md">
@@ -78,7 +32,35 @@
 
       <div class="row col-12 q-pa-md">
         <div class="col-10">
-          <q-input type="number" filled label="Exclude files/folders larger than" />
+          <q-input
+            filled
+            label="Exclude files/folders larger than"
+            v-model="excludeFileSize"
+            :rules="[
+              val => {
+                if (val.length > 0) {
+
+                  for (let i = 0; i < val.length; i++) {
+                    if (!val[i].match(/^[0-9]*$/gi)) {
+                      excludeFileSize = ''
+                      return false
+                    }
+                  }
+
+                  if (val.split('').reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) === 0) {
+                    excludeFileSize = ''; return false
+                  }
+
+                  if (val > 100) {
+                    excludeFileSize = 100; return false
+                  }
+                }
+                else {
+                  return false
+                }
+              }
+            ]"
+          />
         </div>
         <div class="col-2">
           <q-select class="q-ml-sm" v-model="sunit" :options="units" color="primary"
@@ -94,14 +76,20 @@
 </template>
 
 <script>
+import FileTree from './FileTree'
 export default {
   name: 'PageFileSystem',
+  components: {
+    FileTree
+  },
   data: () => {
     return {
       modelAdd: null,
       modelAddUnique: ['.pdf', '.exe'],
       modelToggle: null,
       modelCurrentValue: '',
+
+      excludeFileSize: 0,
 
       sunit: 'MB',
 
